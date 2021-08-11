@@ -1,0 +1,4 @@
+RSID=$1
+
+CHROMOSOME="chr22"
+SAMPLE
