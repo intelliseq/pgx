@@ -1,11 +1,11 @@
 {
-  "simulate_neat_workflow.simulate_neat.user_defined_targeted_regions_bed_file": "$SIMULATION_BED",
+  "simulate_neat_workflow.simulate_neat.user_defined_targeted_regions_bed_file": "src/main/resources/bed/cyps_2mln.bed",
   "simulate_neat_workflow.simulate_neat.no_jobs": 1,
   "simulate_neat_workflow.simulate_neat.output_golden_bam_file": true,
   "simulate_neat_workflow.simulate_neat.chromosome": "$CHROMOSOME",
   "simulate_neat_workflow.simulate_neat.predefined_targeted_regions": "whole-reference-sequence",
-  "simulate_neat_workflow.simulate_neat.simulated_sample_name": "$SAMPLE_NAME",
+  "simulate_neat_workflow.simulate_neat.simulated_sample_name": "$RSID",
   "simulate_neat_workflow.simulate_neat.vcf_gz_with_variants_to_insert": "$SIMULATION_VCF_GZ",
-  "simulate_neat_workflow.simulate_neat.average_coverage": "$COVERAGE",
+  "simulate_neat_workflow.simulate_neat.average_coverage": "30",
   "simulate_neat_workflow.simulate_neat.ploidy": 1
 }
