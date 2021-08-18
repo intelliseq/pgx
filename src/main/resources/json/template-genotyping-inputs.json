@@ -1,0 +1,5 @@
+{
+    "pgx.fastqs": ["$FQ1", "$FQ2"],
+    "pgx.kit": "genome",
+    "pgx.java_mem_options": "-Xms4g -Xmx8g"
+}

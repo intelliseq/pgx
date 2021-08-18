@@ -1,21 +1,38 @@
 RSID=$1
+DBSNP="resources/GRCh38.dbSNP155.chr.norm.vcf.gz"
+VCF="resources/pgx/vcf/$RSID.vcf.gz"
+#zcat $DBSNP | grep -P "^#|\t$RSID\t" | bgzip -c > $VCF
 
-
-SIMULATION_BED="${PROJECT_DIR}resources/miscellaneous/simulated-samples/bed_files/cyps_2mln.bed"
-INPUT_TEMPLATE="${PROJECT_DIR}resources/miscellaneous/simulated-samples/samples/pgx-test/create-inputs/template-inputs.json"
-CHROMOSOME="chr22"
-SAMPLE_NAME="$GENE-star-$STAR"
-SIMULATION_VCF_GZ="$OUTPUT_PATH/$GENE-star-$STAR-and-cyps.vcf.gz"
+SIMULATION_BED="src/main/resources/bed/cyps_2mln.bed"
+INPUT_TEMPLATE="src/main/resources/json/template-inputs.json"
+OPTIONS_TEMPLATE="src/main/resources/json/template-options.json"
+GENO_INPUT_TEMPLATE="src/main/resources/json/template-genotyping-inputs.json"
+CHROMOSOME=$(zcat $VCF | tail -1 | cut -f 1)
+SAMPLE_NAME=$RSID
+SIMULATION_VCF_GZ=$VCF
 COVERAGE="30"
-
+SIMULATED_PATH="resources/pgx/simulated/$RSID"
 
 sed -e "s#\$SIMULATION_BED#$SIMULATION_BED#" \
 -e "s#\$CHROMOSOME#$CHROMOSOME#" \
 -e "s#\$SAMPLE_NAME#$SAMPLE_NAME#" \
 -e "s#\$SIMULATION_VCF_GZ#$SIMULATION_VCF_GZ#" \
 -e "s#\$COVERAGE#$COVERAGE#" \
-$INPUT_TEMPLATE > $OUTPUT_PATH/$GENE-star-$STAR-simulate-neat-input.json
+$INPUT_TEMPLATE > resources/pgx/inputs/$RSID-input.json
 
-echo "$OUTPUT_PATH/$GENE-star-$STAR-simulate-neat-input.json"
-cat "$OUTPUT_PATH/$GENE-star-$STAR-simulate-neat-input.json"
+sed -e "s#\$PATH#$SIMULATED_PATH#" \
+$OPTIONS_TEMPLATE > resources/pgx/options/$RSID-options.json
 
+#cromwell run src/main/wdl/simulate-neat.wdl --inputs resources/pgx/inputs/$RSID-input.json --options resources/pgx/options/$RSID-options.json
+
+FQ1=$SIMULATED_PATH"/"$RSID"_1.fq.gz"
+FQ2=$SIMULATED_PATH"/"$RSID"_2.fq.gz"
+sed -e "s#\$FQ1#$FQ1#" \
+    -e "s#\$FQ2#$FQ2#" \
+$GENO_INPUT_TEMPLATE > resources/pgx/inputs/$RSID-geno-inputss.json
+
+
+
+GENOTYPING_PATH="resources/pgx/genotyping/$RSID"
+sed -e "s#\$PATH#$GENOTYPING_PATH#" \
+$OPTIONS_TEMPLATE > resources/pgx/options/$RSID-geno-options.json

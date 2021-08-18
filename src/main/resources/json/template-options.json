@@ -1,0 +1,6 @@
+{
+    "final_workflow_outputs_dir": "$PATH",
+    "use_relative_output_paths": true,
+    "final_workflow_log_dir": "$PATH/log-dir",
+    "final_call_logs_dir": "$PATH/call-logs-dir"
+}
