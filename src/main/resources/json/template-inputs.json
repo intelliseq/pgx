@@ -1,5 +1,5 @@
 {
-  "simulate_neat_workflow.simulate_neat.user_defined_targeted_regions_bed_file": "src/main/resources/bed/cyps_2mln.bed",
+  "simulate_neat_workflow.simulate_neat.user_defined_targeted_regions_bed_file": "pgx/src/main/resources/bed/cyps_2mln.bed",
   "simulate_neat_workflow.simulate_neat.no_jobs": 1,
   "simulate_neat_workflow.simulate_neat.output_golden_bam_file": true,
   "simulate_neat_workflow.simulate_neat.chromosome": "$CHROMOSOME",
